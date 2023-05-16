@@ -1,0 +1,71 @@
+body{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    
+}
+
+.glow-on{
+    width: 220px;
+    height: 40px;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    border-radius: 10px;
+    background-color: black;
+    color: aliceblue;
+    position: relative;
+    cursor: pointer;
+    z-index: 0;
+}
+.glow-on:before{
+    content: '';
+    background: linear-gradient(45deg,#ff0000, #ff7300,
+       #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+   /* if we use transform:translate(-2px,-2px)
+        is not the same the top and left */
+       top: -4px;
+    left: -4px;
+    position: absolute;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation:glowing 20s linear infinite;
+    opacity: 0;
+    transition:opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on:after{
+    content:'';
+    z-index:-1;
+    background:#111;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius:10px;
+}
+
+.glow-on:active{
+    background: #000000;
+
+}
+.glow-on:active:after{
+    background:transparent;
+}
+.glow-on:hover:before{
+    opacity: 1;
+}
+
+@keyframes glowing{
+    0%{background-position:0 0;}
+    50%{background-position:400% 0;}
+    100%{background-position:0 0;}
+}
